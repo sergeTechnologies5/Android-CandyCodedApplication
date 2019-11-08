@@ -23,16 +23,6 @@ public class InfoActivity extends AppCompatActivity {
                 load(uri).
                 into(candyStoreImageView);
 
-        TextView image_view_map = findViewById(R.id.text_view_address);
-
-        image_view_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createMapIntent(view);
-            }
-        });
-
-
     }
 
     public void createMapIntent(View view){
