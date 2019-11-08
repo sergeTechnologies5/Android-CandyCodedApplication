@@ -1,9 +1,12 @@
 package com.pluralsight.candycoded;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -15,11 +18,33 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         Uri uri = Uri.parse("android.resource://com.codeschool.candycoded/" + R.drawable.store_front);
-        ImageView candyStoreImageView = (ImageView)findViewById(R.id.image_view_candy_store);
+        ImageView candyStoreImageView = findViewById(R.id.image_view_candy_store);
         Picasso.with(this).
                 load(uri).
                 into(candyStoreImageView);
 
+        TextView image_view_map = findViewById(R.id.text_view_address);
+
+        image_view_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createMapIntent(view);
+            }
+        });
+
+
+    }
+
+    public void createMapIntent(View view){
+
+        Uri googleURL = Uri.parse("geo:0,0?q=618 E South St Orlando, FL 32801");
+
+        Intent googleMap = new Intent(Intent.ACTION_VIEW, googleURL);
+        googleMap.setPackage("com.google.android.apps.maps");
+
+        if (googleMap.resolveActivity(getPackageManager()) != null){
+            startActivity(googleMap);
+        }
 
     }
 
